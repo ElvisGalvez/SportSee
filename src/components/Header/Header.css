@@ -1,0 +1,53 @@
+.header {
+    background-color: #020203;
+    height: 91px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;  
+  }
+  
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+}
+  
+.nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+  
+  .nav-list-item {
+    margin-right: 32px; 
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    height: 32px; 
+    margin-right: 8px; 
+    height: 57.2px;
+    width: 57.2px;
+  }
+  
+  .logo-text {
+    color: red;
+    font-size: 24px;
+  }
+  
