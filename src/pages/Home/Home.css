@@ -1,0 +1,25 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.main-content {
+    display: flex;
+    align-items: flex-start;
+}
+
+.user-greeting {
+    padding-left: 50px;
+}
+
+.greeting {
+    font-size: 48px;
+}
+  
+.user-name {
+    color: red;
+}
+
+.congratulations {
+    font-size: 18px;
+}
