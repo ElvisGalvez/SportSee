@@ -3,32 +3,50 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'r
 import './UserPerformanceRadarChart.css';
 
 const UserPerformanceRadarChart = ({ data, kindMapping }) => {
+    const TRANSLATION_MAPPING = {
+        "intensity": "Intensité",
+        "speed": "Vitesse",
+        "strength": "Force",
+        "endurance": "Endurance",
+        "energy": "Energie",
+        "cardio": "Cardio"
+    };
+
+    const KIND_ORDER = {
+        "Intensité": 1,
+        "Vitesse": 2,
+        "Force": 3,
+        "Endurance": 4,
+        "Energie": 5,
+        "Cardio": 6
+    };
+
     const transformedData = Array.isArray(data) ? data.map(item => ({
-        subject: kindMapping[item.kind], 
+        subject: TRANSLATION_MAPPING[kindMapping[item.kind]],
         key: item.kind,
         fullMark: item.value
     })) : [];
 
-    
+    transformedData.sort((a, b) => KIND_ORDER[a.subject] - KIND_ORDER[b.subject]);
 
     return (
         <div className="radar-chart-container">
             <RadarChart
-                width={258}
-                height={263}
+                width={250}  
+                height={250} 
                 data={transformedData}
-                cx={129}
-                cy={131.5}
+                cx={125}     
+                cy={125}     
             >
-                <PolarGrid 
+                <PolarGrid
                     gridType='polygon'
                     radialLines={false}
                 />
                 <PolarAngleAxis
                     dataKey="subject"
-                    tick={{ fill: "white", fontSize: 12 }} 
+                    tick={{ fill: "white", fontSize: 12, textAnchor: 'middle' }}
                 />
-                <PolarRadiusAxis tick={false} axisLine={false} />  
+                <PolarRadiusAxis tick={false} axisLine={false} domain={[0, 165]} />
                 <Radar
                     dataKey="fullMark"
                     stroke="#FF0000"
