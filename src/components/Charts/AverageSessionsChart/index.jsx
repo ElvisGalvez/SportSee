@@ -24,12 +24,14 @@ const AverageSessionsChart = ({ data }) => {
         <div className="average-sessions-chart-container">
             <h4>Durée moyenne des sessions</h4>
             <LineChart
-    width={258}
-    height={263}
-    data={data}
-    margin={{ top: 5, right: 5, bottom: 40, left: 5 }} 
-    onMouseMove={handleMouseMove}
->
+                width={218}
+                height={223}
+                data={data}
+                margin={{ top: 5, right: 5, bottom: 40, left: 5 }}
+                onMouseMove={handleMouseMove}
+            >
+
+
                 <defs>
                     <linearGradient id="sessionGradient" x1="0" y1="0" x2="1" y2="0">
                         <stop offset="0%" stopColor="#FFFFFF" stopOpacity={0.4032} />
@@ -39,14 +41,14 @@ const AverageSessionsChart = ({ data }) => {
 
 
                 <XAxis
-                     dataKey="day"
-                     tickFormatter={tickFormatter}
-                     axisLine={false}
-                     tickLine={false}
-                     tick={{ fill: '#FFFFFF', fontSize: 12, opacity: 0.5, dy: 20 }} 
+                    dataKey="day"
+                    tickFormatter={tickFormatter}
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: '#FFFFFF', fontSize: 12, opacity: 0.5, dy: 20 }}
                 />
 
-                
+
                 <Tooltip
                     cursor={{ stroke: 'transparent', fill: 'transparent' }}
                     content={<CustomTooltip />}

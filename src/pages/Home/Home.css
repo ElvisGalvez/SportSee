@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
 }
-  
+
 .main-content {
     display: flex;
     align-items: flex-start;
@@ -15,7 +15,7 @@
 .greeting {
     font-size: 48px;
 }
-  
+
 .user-name {
     color: red;
 }
@@ -24,9 +24,32 @@
     font-size: 18px;
 }
 
+.chart-and-stats-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.charts-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
 .chart-container {
     display: flex;
-    justify-content: space-between;  
-    width: 100%;  
-    padding: 0 40px;  
+    flex-direction: column;
+    gap: 20px;
+}
+
+.graphs-container {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px;
+}
+
+.nutrition-stats {
+    flex-shrink: 0;
+    width: 250px;
 }
