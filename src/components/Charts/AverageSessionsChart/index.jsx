@@ -1,10 +1,19 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { LineChart, Line, XAxis, Tooltip, ReferenceArea } from 'recharts';
 import './AverageSessionsChart.css';
 
 const AverageSessionsChart = ({ data }) => {
     const [activeIndex, setActiveIndex] = useState(null);
     const lastActiveIndex = useRef(null);
+    const [processedData, setProcessedData] = useState([]);
+
+    useEffect(() => {
+        // Ajout de données supplémentaires pour les bords
+        const newData = [...data];
+        newData.unshift({ day: 0, sessionLength: data[0]?.sessionLength });
+        newData.push({ day: 8, sessionLength: data[data.length - 1]?.sessionLength });
+        setProcessedData(newData);
+    }, [data]);
 
     const tickFormatter = (value) => {
         if (value === 0 || value === 8) return '';
@@ -20,16 +29,41 @@ const AverageSessionsChart = ({ data }) => {
         }
     };
 
+    const CustomActiveDot = (props) => {
+        const { cx, cy } = props;
+        return (
+            <g>
+                <circle
+                    cx={cx}
+                    cy={cy}
+                    r={5}
+                    stroke="white"
+                    strokeWidth={5}
+                    strokeOpacity={0.1983}
+                    fill="transparent"
+                />
+                <circle
+                    cx={cx}
+                    cy={cy}
+                    r={4}
+                    fill="white"
+                />
+            </g>
+        );
+    };
+
+
     return (
         <div className="average-sessions-chart-container">
             <h4>Durée moyenne des sessions</h4>
-            <LineChart
-                width={218}
-                height={223}
-                data={data}
-                margin={{ top: 5, right: 5, bottom: 40, left: 5 }}
-                onMouseMove={handleMouseMove}
-            >
+            <div className="chart-wrapper">
+                <LineChart
+                    width={258}
+                    height={223}
+                    data={processedData}
+                    margin={{ top: 5, right: 0, bottom: 40, left: 0 }}
+                    onMouseMove={handleMouseMove}
+                >
 
 
                 <defs>
@@ -46,6 +80,7 @@ const AverageSessionsChart = ({ data }) => {
                     axisLine={false}
                     tickLine={false}
                     tick={{ fill: '#FFFFFF', fontSize: 12, opacity: 0.5, dy: 20 }}
+                    
                 />
 
 
@@ -63,23 +98,39 @@ const AverageSessionsChart = ({ data }) => {
                     dataKey="sessionLength"
                     stroke="url(#sessionGradient)"
                     strokeWidth={2}
+                    dot={false}
+                    activeDot={<CustomActiveDot />} 
                 />
             </LineChart>
+        </div>
         </div>
     );
 };
 
 const CustomTooltip = ({ active, payload }) => {
+    const tooltipStyle = {
+        width: '39px',
+        height: '25px',
+        backgroundColor: '#FFFFFF',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        fontSize: '8px',
+        color: '#000000',
+        textAlign: 'center'
+    };
+
     if (active && payload && payload.length) {
         const data = payload[0].payload;
         return (
-            <div className="custom-tooltip">
-                <p>Jour : {['L', 'M', 'M', 'J', 'V', 'S', 'D'][data.day - 1]}</p>
-                <p>Minutes : {data.sessionLength}</p>
+            <div style={tooltipStyle}>
+                <p>{`${data.sessionLength} min`}</p>
             </div>
         );
     }
     return null;
 };
+
+
 
 export default AverageSessionsChart;

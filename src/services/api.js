@@ -1,19 +1,35 @@
-import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE } from '../mocks/mockData';
+const BASE_URL = 'http://localhost:3000'; //backend en cours d'exécution sur http://localhost:3000
 
-export const getUserDataById = (userId) => {
-    return USER_MAIN_DATA.find(data => data.id === userId);
+async function handleFetch(url) { // effectue une requête HTTP GET vers l'URL spécifiée plus bas
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const json = await response.json();
+        return json.data;
+    } catch (error) {
+        console.error('There was a problem with the fetch operation:', error.message);
+        throw error;
+    }
 }
 
-export const getUserActivityByUserId = (userId) => {
-    return USER_ACTIVITY.find(data => data.userId === userId);
+export const getUserDataById = async (userId) => { //Utilise handleFetch pour récupérer les données principales d'un utilisateur spécifique en fonction de son identifiant
+    const url = `${BASE_URL}/user/${userId}`;
+    return handleFetch(url);
 }
 
-export const getAverageSessionsByUserId = (userId) => {
-    const result = USER_AVERAGE_SESSIONS.find(data => data.userId === userId);
-    console.log("Résultat pour getAverageSessionsByUserId:", result);
-    return result;
+export const getUserActivityByUserId = async (userId) => {
+    const url = `${BASE_URL}/user/${userId}/activity`;
+    return handleFetch(url);
 }
 
-export const getUserPerformanceByUserId = (userId) => {
-    return USER_PERFORMANCE.find(data => data.userId === userId);
+export const getAverageSessionsByUserId = async (userId) => {
+    const url = `${BASE_URL}/user/${userId}/average-sessions`;
+    return handleFetch(url);
+}
+
+export const getUserPerformanceByUserId = async (userId) => {
+    const url = `${BASE_URL}/user/${userId}/performance`;
+    return handleFetch(url);
 }

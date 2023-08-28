@@ -1,11 +1,13 @@
 .vertical-nav {
     background-color: #020203;
-    height: 100vh;
+    min-height: 113vh;
     width: 117px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-right: 107px;
+    
 }
 
 .nav-group {
@@ -24,6 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0px 27px 0px 27px;
 }
 
 .nav-square svg {
@@ -38,3 +41,4 @@
     transform: rotate(180deg);
     padding-top: 60px;
 }
+

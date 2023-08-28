@@ -8,10 +8,6 @@
     align-items: flex-start;
 }
 
-.user-greeting {
-    padding-left: 50px;
-}
-
 .greeting {
     font-size: 48px;
 }

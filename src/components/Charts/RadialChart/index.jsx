@@ -13,8 +13,8 @@ const RadialChart = ({ data }) => {
         height={263} 
         cx={129} 
         cy={132} 
-        innerRadius={69.69}
-        outerRadius={79.69}
+        innerRadius={85}
+        outerRadius={95}
         barSize={10}
         data={chartData}
         startAngle={220}
@@ -34,7 +34,7 @@ const RadialChart = ({ data }) => {
           cornerRadius={10}
           background={{ fill: '#FFFFFF' }}
         />
-        <text x={20} y={20} fontSize={15} fill="#20253A">Score</text>
+        <text x={35} y={45} fontSize={15} fill="#20253A">Score</text>
         <text x={129} y={120} textAnchor="middle" dominantBaseline="middle" fontSize={26} fontWeight="bold" fill="#282D30">{`${score}%`}</text>
         <text x={129} y={147} textAnchor="middle" dominantBaseline="middle" fontSize={26} fontWeight="700" fill="#74798C">de votre</text>
         <text x={129} y={174} textAnchor="middle" dominantBaseline="middle" fontSize={26} fontWeight="700" fill="#74798C">objectif</text>

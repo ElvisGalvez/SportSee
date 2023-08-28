@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import VerticalNav from '../../components/VerticalNav';
-import { getUserDataById, getUserActivityByUserId, getAverageSessionsByUserId, getUserPerformanceByUserId } from '../../services/api';
+import { getUserDataById, getUserActivityByUserId, getAverageSessionsByUserId, getUserPerformanceByUserId } from '../../services/DataApi';
 import './Home.css';
 import DailyActivityChart from '../../components/Charts/DailyActivityChart';
 import AverageSessionsChart from '../../components/Charts/AverageSessionsChart';
@@ -17,9 +17,11 @@ function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedUserData = await getUserDataById(12);
+     const fetchedUserData = await getUserDataById(12);
+      console.log(fetchedUserData);
       const fetchedUserActivity = await getUserActivityByUserId(12);
       const fetchedAverageSessions = await getAverageSessionsByUserId(12);
+      console.log(fetchedAverageSessions)
       const fetchedUserPerformance = await getUserPerformanceByUserId(12);
 
       setUserData(fetchedUserData);

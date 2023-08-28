@@ -1,11 +1,18 @@
 .stat-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px; 
+    justify-content: center;
+    margin-bottom: 40px; 
     width: 258px;
     height: 124px;
     background-color: #FBFBFB;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212);
+    border-radius: 10px;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .icon-container {
@@ -19,7 +26,8 @@
 
 .text-container {
     flex: 1;
-    padding-left: 10px;
+    gap: 2px;
+    padding-left: 24px;
     display: flex;
     flex-direction: column;
 }
@@ -34,4 +42,3 @@
     font-size: 14px;
     color: #74798C;
 }
-

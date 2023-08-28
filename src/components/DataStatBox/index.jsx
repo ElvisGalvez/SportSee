@@ -24,12 +24,14 @@ const DataStatBox = ({ color, icon, value, label }) => {
 
     return (
         <div className="stat-item">
-            <div className="icon-container" style={{ backgroundColor: color }}>
-                <IconComponent />
-            </div>
-            <div className="text-container">
-                <span className="value">{value}</span>
-                <span className="label">{label}</span>
+            <div className="content-wrapper">
+                <div className="icon-container" style={{ backgroundColor: color }}>
+                    <IconComponent />
+                </div>
+                <div className="text-container">
+                    <span className="value">{value}</span>
+                    <span className="label">{label}</span>
+                </div>
             </div>
         </div>
     );
