@@ -1,6 +1,8 @@
-const BASE_URL = 'http://localhost:3000'; //backend en cours d'exécution sur http://localhost:3000
+import { UserData, UserActivity, AverageSessions, UserPerformance } from './models'; 
 
-async function handleFetch(url) { // effectue une requête HTTP GET vers l'URL spécifiée plus bas
+const BASE_URL = 'http://localhost:3000';
+
+async function handleFetch(url) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -14,22 +16,26 @@ async function handleFetch(url) { // effectue une requête HTTP GET vers l'URL s
     }
 }
 
-export const getUserDataById = async (userId) => { //Utilise handleFetch pour récupérer les données principales d'un utilisateur spécifique en fonction de son identifiant
+export const getUserDataById = async (userId) => {
     const url = `${BASE_URL}/user/${userId}`;
-    return handleFetch(url);
+    const data = await handleFetch(url);
+    return new UserData(data);  // Utilisation du modèle UserData
 }
 
 export const getUserActivityByUserId = async (userId) => {
     const url = `${BASE_URL}/user/${userId}/activity`;
-    return handleFetch(url);
+    const data = await handleFetch(url);
+    return new UserActivity(data);  // Utilisation du modèle UserActivity
 }
 
 export const getAverageSessionsByUserId = async (userId) => {
     const url = `${BASE_URL}/user/${userId}/average-sessions`;
-    return handleFetch(url);
+    const data = await handleFetch(url);
+    return new AverageSessions(data);  // Utilisation du modèle AverageSessions
 }
 
 export const getUserPerformanceByUserId = async (userId) => {
     const url = `${BASE_URL}/user/${userId}/performance`;
-    return handleFetch(url);
+    const data = await handleFetch(url);
+    return new UserPerformance(data);  // Utilisation du modèle UserPerformance
 }

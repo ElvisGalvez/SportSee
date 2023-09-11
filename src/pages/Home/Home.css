@@ -50,3 +50,21 @@
     flex-shrink: 0;
     width: 250px;
 }
+
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .error-message {
+    background-color: #f44336; 
+    color: white;
+    padding: 14px 20px;
+    margin: 14px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }

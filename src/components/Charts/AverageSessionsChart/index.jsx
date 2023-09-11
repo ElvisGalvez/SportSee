@@ -52,7 +52,6 @@ const AverageSessionsChart = ({ data }) => {
         );
     };
 
-
     return (
         <div className="average-sessions-chart-container">
             <h4>Durée moyenne des sessions</h4>
@@ -64,45 +63,40 @@ const AverageSessionsChart = ({ data }) => {
                     margin={{ top: 5, right: 0, bottom: 40, left: 0 }}
                     onMouseMove={handleMouseMove}
                 >
+                    <defs>
+                        <linearGradient id="sessionGradient" x1="0" y1="0" x2="1" y2="0">
+                            <stop offset="0%" stopColor="#FFFFFF" stopOpacity={0.4032} />
+                            <stop offset="100%" stopColor="#FFFFFF" stopOpacity={1} />
+                        </linearGradient>
+                    </defs>
 
+                    <XAxis
+                        dataKey="day"
+                        tickFormatter={tickFormatter}
+                        axisLine={false}
+                        tickLine={false}
+                        tick={{ fill: '#FFFFFF', fontSize: 12, opacity: 0.5, dy: 20 }}
+                    />
 
-                <defs>
-                    <linearGradient id="sessionGradient" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="#FFFFFF" stopOpacity={0.4032} />
-                        <stop offset="100%" stopColor="#FFFFFF" stopOpacity={1} />
-                    </linearGradient>
-                </defs>
-
-
-                <XAxis
-                    dataKey="day"
-                    tickFormatter={tickFormatter}
-                    axisLine={false}
-                    tickLine={false}
-                    tick={{ fill: '#FFFFFF', fontSize: 12, opacity: 0.5, dy: 20 }}
-                    
-                />
-
-
-                <Tooltip
-                    cursor={{ stroke: 'transparent', fill: 'transparent' }}
-                    content={<CustomTooltip />}
-                />
-                {activeIndex !== null && data[activeIndex] && (isIndexInFirstHalf ? (
-                    <ReferenceArea x1={1} x2={data[activeIndex].day} fill="rgba(0, 0, 0, 0.0975)" />
-                ) : (
-                    <ReferenceArea x1={data[activeIndex].day} x2={7} fill="rgba(0, 0, 0, 0.0975)" />
-                ))}
-                <Line
-                    type="monotone"
-                    dataKey="sessionLength"
-                    stroke="url(#sessionGradient)"
-                    strokeWidth={2}
-                    dot={false}
-                    activeDot={<CustomActiveDot />} 
-                />
-            </LineChart>
-        </div>
+                    <Tooltip
+                        cursor={{ stroke: 'transparent', fill: 'transparent' }}
+                        content={<CustomTooltip />}
+                    />
+                    {activeIndex !== null && data[activeIndex] && (isIndexInFirstHalf ? (
+                        <ReferenceArea x1={1} x2={data[activeIndex].day} fill="rgba(0, 0, 0, 0.0975)" />
+                    ) : (
+                        <ReferenceArea x1={data[activeIndex].day} x2={7} fill="rgba(0, 0, 0, 0.0975)" />
+                    ))}
+                    <Line
+                        type="monotone"
+                        dataKey="sessionLength"
+                        stroke="url(#sessionGradient)"
+                        strokeWidth={2}
+                        dot={false}
+                        activeDot={<CustomActiveDot />}
+                    />
+                </LineChart>
+            </div>
         </div>
     );
 };
@@ -130,7 +124,5 @@ const CustomTooltip = ({ active, payload }) => {
     }
     return null;
 };
-
-
 
 export default AverageSessionsChart;

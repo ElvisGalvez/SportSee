@@ -3,26 +3,23 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'r
 import './UserPerformanceRadarChart.css';
 
 function renderPolarAngleAxis({ payload, x, y, cx, cy, ...rest }) {
-    const factor = 0.93; 
+    const factor = 0.93;
     const newX = cx + (x - cx) * factor;
     const newY = cy + (y - cy) * factor;
-    
+
     return (
-      <text
-        {...rest}
-        dominantBaseline="middle"
-        y={newY}
-        x={newX}
-        fill="white"
-        fontSize={12}
-      >
-        {payload.value}
-      </text>
+        <text
+            {...rest}
+            dominantBaseline="middle"
+            y={newY}
+            x={newX}
+            fill="white"
+            fontSize={12}
+        >
+            {payload.value}
+        </text>
     );
-  }
-  
-  
-  
+}
 
 const UserPerformanceRadarChart = ({ data, kindMapping }) => {
     const TRANSLATION_MAPPING = {
@@ -44,7 +41,7 @@ const UserPerformanceRadarChart = ({ data, kindMapping }) => {
     };
 
     const maxDataValue = Math.max(...data.map(item => item.value));
-    const maxPossibleValue = 130; 
+    const maxPossibleValue = 130;
 
     const transformedData = Array.isArray(data) ? data.map(item => ({
         subject: TRANSLATION_MAPPING[kindMapping[item.kind]],
@@ -64,10 +61,10 @@ const UserPerformanceRadarChart = ({ data, kindMapping }) => {
                 cy={125}
             >
                 <PolarGrid
-  gridType='polygon'
-  radialLines={false}
-  polarRadius={[15, 25, 45, 65, 85]}
-/>
+                    gridType='polygon'
+                    radialLines={false}
+                    polarRadius={[15, 25, 45, 65, 85]}
+                />
                 <PolarAngleAxis
                     dataKey="subject"
                     tick={props => renderPolarAngleAxis(props)}

@@ -8,22 +8,22 @@ const RadialChart = ({ data }) => {
 
   return (
     <div className="gauge-chart-container">
-      <RadialBarChart 
-        width={258} 
-        height={263} 
-        cx={129} 
-        cy={132} 
+      <RadialBarChart
+        width={258}
+        height={263}
+        cx={129}
+        cy={132}
         innerRadius={85}
         outerRadius={95}
         barSize={10}
         data={chartData}
         startAngle={220}
-        endAngle={-140} 
+        endAngle={-140}
       >
-        <PolarAngleAxis 
-          type="number" 
-          domain={[0, 100]} 
-          angleAxisId={0} 
+        <PolarAngleAxis
+          type="number"
+          domain={[0, 100]}
+          angleAxisId={0}
           tick={false}
         />
         <RadialBar

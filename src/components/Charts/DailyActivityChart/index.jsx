@@ -26,7 +26,7 @@ const CustomTooltip = ({ active, payload }) => {
         backgroundColor: '#E60000',
         color: '#FFFFFF',
         fontSize: '7px',
-        lineHeight: '21px',  
+        lineHeight: '21px',
         textAlign: 'center',
         padding: '5px'
       }}>
@@ -85,6 +85,7 @@ const DailyActivityChart = ({ data }) => {
           axisLine={false}
           tickLine={false}
         />
+        
         <YAxis className="y-axis-right" yAxisId="cal" orientation="right" hide={true} />
         <Tooltip content={<CustomTooltip />} />
         <Bar className="bar-kg" yAxisId="kg" dataKey="kilogram" radius={[4, 4, 0, 0]} />

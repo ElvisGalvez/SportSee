@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../../components/Header';
 import VerticalNav from '../../components/VerticalNav';
-import { getUserDataById, getUserActivityByUserId, getAverageSessionsByUserId, getUserPerformanceByUserId } from '../../services/DataApi';
+import { getUserDataById, getUserActivityByUserId, getAverageSessionsByUserId, getUserPerformanceByUserId } from '../../services/dataApi';
 import './Home.css';
 import DailyActivityChart from '../../components/Charts/DailyActivityChart';
 import AverageSessionsChart from '../../components/Charts/AverageSessionsChart';
@@ -14,20 +14,26 @@ function Home() {
   const [userActivity, setUserActivity] = useState(null);
   const [averageSessions, setAverageSessions] = useState(null);
   const [userPerformance, setUserPerformance] = useState(null);
+  const [error, setError] = useState(null);  // État pour gérer les erreurs
 
   useEffect(() => {
     const fetchData = async () => {
-     const fetchedUserData = await getUserDataById(12);
-      console.log(fetchedUserData);
-      const fetchedUserActivity = await getUserActivityByUserId(12);
-      const fetchedAverageSessions = await getAverageSessionsByUserId(12);
-      console.log(fetchedAverageSessions)
-      const fetchedUserPerformance = await getUserPerformanceByUserId(12);
+      try {
+        const fetchedUserData = await getUserDataById(12);
+        const fetchedUserActivity = await getUserActivityByUserId(12);
+        const fetchedAverageSessions = await getAverageSessionsByUserId(12);
+        const fetchedUserPerformance = await getUserPerformanceByUserId(12);
 
-      setUserData(fetchedUserData);
-      setUserActivity(fetchedUserActivity.sessions);
-      setAverageSessions(fetchedAverageSessions.sessions);
-      setUserPerformance(fetchedUserPerformance);
+        // Si tout va bien, mettre à jour l'état
+        setUserData(fetchedUserData);
+        setUserActivity(fetchedUserActivity.sessions);
+        setAverageSessions(fetchedAverageSessions.sessions);
+        setUserPerformance(fetchedUserPerformance);
+        setError(null);  // Réinitialiser le message d'erreur
+      } catch (err) {
+        // En cas d'erreur, mettre à jour l'état d'erreur
+        setError("Une erreur est survenue de notre côté. Veuillez réessayer plus tard.");
+      }
     };
 
     fetchData();
@@ -38,10 +44,11 @@ function Home() {
       <Header />
       <div className="main-content">
         <VerticalNav />
+              {error && <div className="error-message">{error}</div>} {/* Affichage du message d'erreur */}
         {userData && userActivity && averageSessions && userPerformance && (
           <div>
             <div className="user-greeting">
-              <h2 className="greeting">Bonjour <span className="user-name">{userData.userInfos.firstName}</span></h2>
+            <h2 className="greeting">Bonjour <span className="user-name">{userData.firstName}</span></h2>
               <p className="congratulations">Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
             </div>
             <div className="chart-and-stats-container">

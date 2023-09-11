@@ -7,7 +7,6 @@
     justify-content: center;
     align-items: center;
     margin-right: 107px;
-    
 }
 
 .nav-group {
@@ -37,8 +36,7 @@
     color: white;
     font-size: 12px;
     text-align: center;
-    writing-mode: vertical-rl; 
+    writing-mode: vertical-rl;
     transform: rotate(180deg);
     padding-top: 60px;
 }
-
