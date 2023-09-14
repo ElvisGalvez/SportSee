@@ -1,27 +1,33 @@
+//Gère le processus de récupération des données, soit à partir des données simulées (mock) soit à partir de l'API réelle, en fonction de la valeur de USE_MOCK_DATA.
+
 import { USE_MOCK_DATA } from './settings';
 import * as MockAPI from './userDataMock';
 import * as RealAPI from './userDataApi';
-import { UserData, UserActivity, AverageSessions, UserPerformance } from './models'; 
+import { UserData, UserActivity, AverageSessions, UserPerformance } from './models';
 
-// Sélection de l'API en fonction de la valeur de USE_MOCK_DATA
-const API = USE_MOCK_DATA ? MockAPI : RealAPI;
+const actionMap = {
+  mainData: 'getUserDataById',
+  activity: 'getUserActivityByUserId',
+  averageSessions: 'getAverageSessionsByUserId',
+  performance: 'getUserPerformanceByUserId'
+};
 
-export const getUserDataById = async (userId) => {
-    const data = await API.getUserDataById(userId);
-    return new UserData(data);
-}
+const fetchData = async (dataType, userId) => {
+  if (USE_MOCK_DATA) {
+    return await MockAPI.getDataById(dataType, userId);
+  } else {
+    return await RealAPI[actionMap[dataType]](userId);
+  }
+};
 
-export const getUserActivityByUserId = async (userId) => {
-    const data = await API.getUserActivityByUserId(userId);
-    return new UserActivity(data);
-}
+const generateDataFunction = (dataType, Model) => {
+  return async (userId) => {
+    const data = await fetchData(dataType, userId);
+    return new Model(data);
+  };
+};
 
-export const getAverageSessionsByUserId = async (userId) => {
-    const data = await API.getAverageSessionsByUserId(userId);
-    return new AverageSessions(data);
-}
-
-export const getUserPerformanceByUserId = async (userId) => {
-    const data = await API.getUserPerformanceByUserId(userId);
-    return new UserPerformance(data);
-}
+export const getUserDataById = generateDataFunction('mainData', UserData);
+export const getUserActivityByUserId = generateDataFunction('activity', UserActivity);
+export const getAverageSessionsByUserId = generateDataFunction('averageSessions', AverageSessions);
+export const getUserPerformanceByUserId = generateDataFunction('performance', UserPerformance);

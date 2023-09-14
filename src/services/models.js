@@ -1,4 +1,4 @@
-// Modèle pour les données de l'utilisateur
+// Contient les définitions des classes modèles qui structurent et formalisent les données récupérées.
 export class UserData {
     constructor({ id, userInfos, todayScore, keyData }) {
       this.id = id;

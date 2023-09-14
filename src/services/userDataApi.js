@@ -1,8 +1,10 @@
+// Contient les fonctions qui interagissent avec l'API réelle pour récupérer les données.
+
 const BASE_URL = 'http://localhost:3000';
 
-async function handleFetch(url) {
+async function handleFetch(endpoint) {
     try {
-        const response = await fetch(url);
+        const response = await fetch(`${BASE_URL}${endpoint}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -14,18 +16,7 @@ async function handleFetch(url) {
     }
 }
 
-export const getUserDataById = async (userId) => {
-    return handleFetch(`${BASE_URL}/user/${userId}`);
-}
-
-export const getUserActivityByUserId = async (userId) => {
-    return handleFetch(`${BASE_URL}/user/${userId}/activity`);
-}
-
-export const getAverageSessionsByUserId = async (userId) => {
-    return handleFetch(`${BASE_URL}/user/${userId}/average-sessions`);
-}
-
-export const getUserPerformanceByUserId = async (userId) => {
-    return handleFetch(`${BASE_URL}/user/${userId}/performance`);
-}
+export const getUserDataById = (userId) => handleFetch(`/user/${userId}`);
+export const getUserActivityByUserId = (userId) => handleFetch(`/user/${userId}/activity`);
+export const getAverageSessionsByUserId = (userId) => handleFetch(`/user/${userId}/average-sessions`);
+export const getUserPerformanceByUserId = (userId) => handleFetch(`/user/${userId}/performance`);
