@@ -1,26 +1,26 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { LineChart, Line, XAxis, Tooltip, ReferenceArea } from 'recharts';
 import './AverageSessionsChart.css';
+
+const processInitialData = (initialData) => {
+    const newData = [...initialData];
+    newData.unshift({ day: 0, sessionLength: initialData[0]?.sessionLength });
+    newData.push({ day: 8, sessionLength: initialData[initialData.length - 1]?.sessionLength });
+    return newData;
+};
 
 const AverageSessionsChart = ({ data }) => {
     const [activeIndex, setActiveIndex] = useState(null);
     const lastActiveIndex = useRef(null);
-    const [processedData, setProcessedData] = useState([]);
 
-    useEffect(() => { //Données statiques, useEffect pas utile
-        // Ajout de données supplémentaires pour les bords
-        const newData = [...data];
-        newData.unshift({ day: 0, sessionLength: data[0]?.sessionLength });
-        newData.push({ day: 8, sessionLength: data[data.length - 1]?.sessionLength });
-        setProcessedData(newData);
-    }, [data]);
+    const processedData = processInitialData(data);
 
     const tickFormatter = (value) => {
         if (value === 0 || value === 8) return '';
         return ['L', 'M', 'M', 'J', 'V', 'S', 'D'][value - 1];
     };
 
-    const isIndexInFirstHalf = activeIndex !== null && activeIndex < 3.5;
+    const isIndexInFirstHalf = activeIndex !== null && activeIndex < 4.5;
 
     const handleMouseMove = (e) => {
         if (e && e.activeTooltipIndex !== lastActiveIndex.current) {
