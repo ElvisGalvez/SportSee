@@ -3,7 +3,7 @@ import { RadialBarChart, RadialBar, PolarAngleAxis } from 'recharts';
 import './RadialChart.css';
 
 const RadialChart = ({ data }) => {
-  const score = (data.todayScore || data.score || 0) * 100;
+  const score = (data.todayScore || data.score || 0) * 100; //Mettre dans une fonction "getScore"
   const chartData = [{ name: 'Score', value: score }];
 
   return (

@@ -7,7 +7,7 @@ const AverageSessionsChart = ({ data }) => {
     const lastActiveIndex = useRef(null);
     const [processedData, setProcessedData] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => { //Données statiques, useEffect pas utile
         // Ajout de données supplémentaires pour les bords
         const newData = [...data];
         newData.unshift({ day: 0, sessionLength: data[0]?.sessionLength });
@@ -82,11 +82,14 @@ const AverageSessionsChart = ({ data }) => {
                         cursor={{ stroke: 'transparent', fill: 'transparent' }}
                         content={<CustomTooltip />}
                     />
-                    {activeIndex !== null && data[activeIndex] && (isIndexInFirstHalf ? (
-                        <ReferenceArea x1={1} x2={data[activeIndex].day} fill="rgba(0, 0, 0, 0.0975)" />
+                    {activeIndex !== null && processedData[activeIndex] && (isIndexInFirstHalf ? (
+                        <ReferenceArea x1={0} x2={processedData[activeIndex].day} fill="rgba(0, 0, 0, 0.0975)" />
                     ) : (
-                        <ReferenceArea x1={data[activeIndex].day} x2={7} fill="rgba(0, 0, 0, 0.0975)" />
+                        <ReferenceArea x1={processedData[activeIndex].day} x2={8} fill="rgba(0, 0, 0, 0.0975)" />
                     ))}
+
+
+
                     <Line
                         type="monotone"
                         dataKey="sessionLength"

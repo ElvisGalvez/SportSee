@@ -1,3 +1,16 @@
+# SportSee Analytics Dashboard
+
+![Screenshot of the dashboard](./src/assets/screenshots/screenshot-name.png)
+
+SportSee is an analytics dashboard tailored for fitness application users. It offers insights into various physical activities, including daily activity, average sessions, user performance, and more.
+This project was undertaken as part of an OpenClassrooms training program, with the aim of developing an analytics dashboard using React.
+
+This project was initiated with [Create React App](https://github.com/facebook/create-react-app).
+
+## About Me
+
+I'm a developer with a passion for technology and web development. I embarked on this project to hone my React skills and deliver an intuitive user interface. Discover more about me and my projects on [my GitHub profile](https://github.com/ElvisGalvez).
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -21,7 +34,7 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.\i
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.\
