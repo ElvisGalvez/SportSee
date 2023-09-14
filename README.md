@@ -1,6 +1,6 @@
 # SportSee Analytics Dashboard
 
-![Screenshot of the dashboard](./src/assets/screenshots/screenshot-name.png)
+![Screenshot of the dashboard](./src/assets/screenshots/sportsee.png)
 
 SportSee is an analytics dashboard tailored for fitness application users. It offers insights into various physical activities, including daily activity, average sessions, user performance, and more.
 This project was undertaken as part of an OpenClassrooms training program, with the aim of developing an analytics dashboard using React.
