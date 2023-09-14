@@ -20,6 +20,7 @@ const fetchData = async (dataType, userId) => {
   }
 };
 
+// Crée et retourne une fonction asynchrone qui, lorsqu'elle est appelée avec un userId, récupère des données spécifiées par dataType et les instancie en utilisant le modèle Model fourni.
 const generateDataFunction = (dataType, Model) => {
   return async (userId) => {
     const data = await fetchData(dataType, userId);
